@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora de Sueldo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>🧮 Calculadora de Sueldo</h1>
+
+      <div class="grid">
+        <label>💰 Sueldo base
+          <input type="number" id="sueldo" min="0" step="0.01" placeholder="0.00" />
+        </label>
+
+        <label>📅 Fecha de ingreso
+          <input type="date" id="fechaIngreso" />
+        </label>
+
+        <label>⏱️ Hs al 50%
+          <input type="number" id="hs50" min="0" step="1" placeholder="0" />
+        </label>
+
+        <label>⏱️ Hs al 100%
+          <input type="number" id="hs100" min="0" step="1" placeholder="0" />
+        </label>
+
+        <label>🛠️ ART.65 (hs)
+          <input type="number" id="art65" min="0" step="1" placeholder="0" />
+        </label>
+
+        <label>🚀 Posible aumento (%)
+          <input type="number" id="aumento" min="-100" step="0.1" placeholder="0" />
+        </label>
+      </div>
+
+      <details class="panel">
+        <summary>⚙️ Configuración de fórmulas</summary>
+        <div class="grid grid-3">
+          <fieldset class="field">
+            <legend>Antigüedad</legend>
+            <label class="row">
+              <input type="radio" name="antiguedadModo" id="antigFijo" value="fijo" checked>
+              <span>7% fijo sobre sueldo (como paga nEC)</span>
+            </label>
+            <label class="row">
+              <input type="radio" name="antiguedadModo" id="antigPorAnio" value="porAnio">
+              <span>
+                Por año (como pagan las demas empresas): <input type="number" id="antigPctPorAnio" min="0" step="0.1" value="1" class="inline"> % por año
+              </span>
+            </label>
+            <p class="hint">Años calculados desde la fecha de ingreso.</p>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend>Retenciones</legend>
+            <label class="row">
+              <input type="radio" name="retencionModo" id="retFijo" value="fijo" checked>
+              <span>Fijo: $ <input type="number" id="retFijoValor" min="0" step="0.01" value="471669.60" class="inline"></span>
+            </label>
+            <label class="row">
+              <input type="radio" name="retencionModo" id="retPorc" value="porcentaje">
+              <span>Porcentaje sobre bruto: <input type="number" id="retPorcentaje" min="0" step="0.01" value="19.25" class="inline"> %</span>
+            </label>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend>Parámetros</legend>
+            <label class="row">
+              Valor hora extra = (sueldo + antigüedad) /
+              <input type="number" id="horasBase" min="1" step="1" value="200" class="inline"> horas
+            </label>
+            <label class="row">
+              ART.65 por hora: $ <input type="number" id="art65ValorHora" min="0" step="0.01" value="1320.59" class="inline">
+            </label>
+          </fieldset>
+        </div>
+      </details>
+
+      <section class="results">
+        <p>📅 Años de antigüedad: <strong id="antiguedadAnios">0</strong></p>
+        <p>📘 Antigüedad: <strong id="antiguedadMonto">$ 0,00</strong></p>
+        <p>💗 Guardias pasivas (12.84%): <strong id="guardias">$ 0,00</strong></p>
+        <p>⏱️ Hs al 50%: <strong id="hs50Monto">$ 0,00</strong></p>
+        <p>⏱️ Hs al 100%: <strong id="hs100Monto">$ 0,00</strong></p>
+        <p>🛠️ ART.65 (<span id="art65TarifaLabel">1.320,59</span> /h): <strong id="art65Monto">$ 0,00</strong></p>
+        <hr />
+        <p>📄 <strong>Bruto:</strong> <span id="bruto">$ 0,00</span></p>
+        <p>🧾 <strong>Retenciones:</strong> <span id="retenciones">$ 0,00</span> <small id="retLabel"></small></p>
+        <p class="neto">✅ <strong>Neto estimado:</strong> <span id="neto">$ 0,00</span></p>
+        <p class="neto-aumento">📈 <strong>Neto con aumento:</strong> <span id="netoAumentado">$ 0,00</span></p>
+      </section>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
