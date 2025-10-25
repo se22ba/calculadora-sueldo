@@ -15,13 +15,13 @@ function toNumberLocale(s) {
   const hasDot   = s.includes('.');
 
   if (hasComma && hasDot) {
-    // Formato AR/EU: 1.234.567,89 -> 1234567.89
+    
     s = s.replace(/\./g, '').replace(',', '.');
   } else if (hasComma) {
-    // Solo coma: 1234567,89 -> 1234567.89
+    
     s = s.replace(',', '.');
   } else {
-    // Solo punto o solo dígitos: 1234567.89 o 1234567 -> tal cual
+    
   }
 
   const n = Number(s);
@@ -55,7 +55,7 @@ function NumInput({ value, onChange, placeholder = '0', step = 'any' }){
 }
 
 export default function App(){
-  // Entradas principales
+  
   const [sueldoBase, setSueldoBase] = useState('0')
   const [aumentoPct, setAumentoPct] = useState('0')
   const [aniosAnt, setAniosAnt] = useState('11')
@@ -65,13 +65,13 @@ export default function App(){
   const [hs50n, setHs50n] = useState('0')
   const [hs100n, setHs100n] = useState('0')
 
-  // Parámetros avanzados (pre-cargados con tus coeficientes)
+  
   const [H, setH] = useState('10912.0933')
   const [coefAnt, setCoefAnt] = useState('0.00573881336')
   const [coefN50, setCoefN50] = useState('0.19995')
   const [coefN100, setCoefN100] = useState('0.26660')
 
-  // Retenciones (editables)
+  
   const [r_jub, setR_jub] = useState('11')
   const [r_ley, setR_ley] = useState('3')
   const [r_os, setR_os] = useState('3')
@@ -88,17 +88,17 @@ export default function App(){
     const kN50  = toNumberLocale(coefN50)
     const kN100 = toNumberLocale(coefN100)
 
-    // Horas (numéricas)
+    
     const vhs50   = toNumberLocale(hs50)
     const vhs100  = toNumberLocale(hs100)
     const vhs50n  = toNumberLocale(hs50n)
     const vhs100n = toNumberLocale(hs100n)
 
-    // Sueldo ajustado + antigüedad
+    
     const sueldoAdj = round2(SB * (1 + A))
     const antig     = round2(sueldoAdj * (yrs * kAnt))
 
-    // Extras y plus nocturno
+    
     const he50     = round2(vhs50  * 1.5 * vH)
     const he100    = round2(vhs100 * 2.0 * vH)
     const plus50n  = round2(vhs50n  * kN50  * vH)
@@ -115,7 +115,7 @@ export default function App(){
       ['Plus nocturno 100%', plus100n],
     ]
 
-    // Retenciones (editables)
+    
     const rates = {
       'Jubilación':          toNumberLocale(r_jub) / 100,
       'Ley 19.032':          toNumberLocale(r_ley) / 100,
@@ -136,7 +136,7 @@ export default function App(){
     r_jub, r_ley, r_os, r_uom, r_seg
   ])
 
-  // ⬇️ ESTE RETURN FALTABA
+  
   return (
     <div className="max-w-6xl mx-auto p-4 md:p-6">
       <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">
